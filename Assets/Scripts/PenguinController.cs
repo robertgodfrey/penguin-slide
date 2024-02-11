@@ -42,7 +42,7 @@ public class PenguinController : MonoBehaviour
             physicsMaterial.dynamicFriction = maxFriction;
         }
 
-        if (new Vector3(0, 0, rb.velocity.z).magnitude > 3.0f)
+        if (new Vector3(0, 0, rb.velocity.z).magnitude > 5.0f)
         {
             rb.velocity = new Vector3(0, 0, rb.velocity.z).normalized * 3.0f + new Vector3(rb.velocity.x, rb.velocity.y, 0);
         }
