@@ -20,6 +20,10 @@ public class CountdownTimer : MonoBehaviour
     {
         timeRemaining -= 1f;
 
+        if (timeRemaining <= 5)
+        {
+            timerText.color = Color.red;
+        }
         if (timeRemaining <= 0f)
         {
             timeRemaining = 0f;
