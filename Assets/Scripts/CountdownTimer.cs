@@ -29,6 +29,6 @@ public class CountdownTimer : MonoBehaviour
             timeRemaining = 0f;
             // todo end game
         }
-        timerText.text = string.Format("{0:00}", timeRemaining);
+        timerText.text = string.Format("00:{0:00}", timeRemaining);
     }
 }

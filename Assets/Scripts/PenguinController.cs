@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -50,9 +51,15 @@ public class PenguinController : MonoBehaviour
                 healthBarBg.sprite = healthBarBgWhite;
             }
             flashNum = 0;
-        } else {
+        }
+        else
+        {
             flashNum++;
         }
+
+        Quaternion targetRotation = Quaternion.Euler(new Vector3(0, 0, 90));
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, Time.deltaTime * 50f);
+
         hitRock++;
     }
 
@@ -64,6 +71,7 @@ public class PenguinController : MonoBehaviour
             playerHealth -= 25;
             healthBarInner.fillAmount = playerHealth * 0.01f;
             hitRock = 0;
+            
         }
     }
 
