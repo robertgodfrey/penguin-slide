@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class CameraFollow : MonoBehaviour {
 
-    public GameObject player;
-    public Vector3 cameraDistance;
+    [SerializeField] private GameObject player;
+    [SerializeField] private Vector3 cameraDistance;
 
     // Use this for initialization
     void Start () {

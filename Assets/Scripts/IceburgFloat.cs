@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class IceburgFloat : MonoBehaviour
 {
-    public float floatHeight = 0.1f;
-    public float floatSpeed = 2f;
-    public float wobbleAmount = 0.1f;
+    [SerializeField] private float floatHeight = 0.1f;
+    [SerializeField] private float floatSpeed = 2f;
+    [SerializeField] private float wobbleAmount = 0.1f;
 
     private Vector3 startPos;
 
