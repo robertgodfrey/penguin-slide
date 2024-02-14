@@ -11,6 +11,9 @@ public class EndScreenManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI fishLabel;
     [SerializeField] private TextMeshProUGUI timeLabel;
 
+    [SerializeField] private AudioSource failSound;
+    [SerializeField] private AudioSource successSound;
+
     void Start()
     {
         if (PlayerPrefs.GetInt("Success") == 1)
@@ -20,6 +23,11 @@ public class EndScreenManager : MonoBehaviour
             totalTimeText.text = PlayerPrefs.GetString("Time") + "s";
             fishLabel.text = "FISH:";
             timeLabel.text = "TIME:";
+            successSound.PlayOneShot(successSound.clip, 0.5f);
+        }
+        else
+        {
+            failSound.PlayOneShot(failSound.clip, 0.3f);
         }
     }
 }

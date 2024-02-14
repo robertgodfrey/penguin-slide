@@ -16,11 +16,24 @@ public class PenguinController : MonoBehaviour
     [SerializeField] private Sprite healthBarBgWhite;
     [SerializeField] private Sprite healthBarBgRed;
     [SerializeField] private CountdownTimer countdownTimer;
+
+    [Header("Sounds")]
+    [SerializeField] private AudioClip slideSoundAudio;
+    [SerializeField] private AudioSource eatFishSound;
+    [SerializeField] private AudioSource penguinComplainSound;
+    [SerializeField] private AudioSource rockHitSound;
+    [SerializeField] private AudioSource penguinScreamSound;
+
+    private AudioSource slideSound;
     
     private Rigidbody rb;
     private Collider playerCollider;
     private PhysicMaterial physicsMaterial;
     private float previousPositionX;
+
+    private bool playerIsGrounded = false;
+    private float airborneTimer = 0f;
+    private bool screamPlayed = false;
 
     private int playerHealth = 100;
     private int fishCount = 0;
@@ -33,6 +46,12 @@ public class PenguinController : MonoBehaviour
         physicsMaterial = playerCollider.material;
         rb = GetComponent<Rigidbody>();
         previousPositionX = transform.position.x;
+
+        slideSound = GetComponent<AudioSource>();
+        slideSound.clip = slideSoundAudio;
+        slideSound.loop = true;
+        slideSound.volume = 0;
+        slideSound.Play();
     }
 
     void FixedUpdate()
@@ -40,6 +59,25 @@ public class PenguinController : MonoBehaviour
         float distanceTraveledX = Math.Abs(transform.position.x - previousPositionX);
         float currentSpeedX = distanceTraveledX / Time.deltaTime;
         previousPositionX = transform.position.x;
+
+        // adjust sound to match speed
+        if (playerIsGrounded)
+        {
+            airborneTimer = 0;
+            slideSound.pitch = Math.Min(currentSpeedX / 10f, 40f);
+            slideSound.volume = currentSpeedX / 10f;
+        }
+        else
+        {
+            airborneTimer += Time.deltaTime;
+            slideSound.volume = 0;
+            if (airborneTimer >= 1.5f && !screamPlayed)
+            {
+                penguinScreamSound.PlayOneShot(penguinScreamSound.clip, 0.4f);
+                screamPlayed = true;
+            }
+        }
+        
 
         // left/right controls
         float horizontalInputSpeed = Input.GetAxis("Horizontal");
@@ -91,7 +129,8 @@ public class PenguinController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Rock") && hitRock > 50)
         {
-            Debug.Log("Hit a rock :(");
+            penguinComplainSound.PlayOneShot(penguinComplainSound.clip, 1f);
+            rockHitSound.PlayOneShot(rockHitSound.clip, 1f);
             playerHealth -= 25;
             if (playerHealth <= 0)
             {
@@ -102,9 +141,21 @@ public class PenguinController : MonoBehaviour
         }
     }
 
+    void OnCollisionStay(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            playerIsGrounded = true;
+        }
+        else
+        {
+            playerIsGrounded = false;
+        }
+    }
+
     public void IncrementFishCount()
     {
-        Debug.Log("Got a fish :)");
+        eatFishSound.PlayOneShot(eatFishSound.clip, 0.5f);
         fishCount++;
         fishCountText.text = string.Format("{0}", fishCount);
     }
