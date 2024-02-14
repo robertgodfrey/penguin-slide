@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class PenguinController : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class PenguinController : MonoBehaviour
     [SerializeField] private Image healthBarInner;
     [SerializeField] private Sprite healthBarBgWhite;
     [SerializeField] private Sprite healthBarBgRed;
+    [SerializeField] private CountdownTimer countdownTimer;
     
     private Rigidbody rb;
     private Collider playerCollider;
@@ -91,6 +93,10 @@ public class PenguinController : MonoBehaviour
         {
             Debug.Log("Hit a rock :(");
             playerHealth -= 25;
+            if (playerHealth <= 0)
+            {
+                EndGame(false);
+            }
             healthBarInner.fillAmount = playerHealth * 0.01f;
             hitRock = 0;
         }
@@ -101,6 +107,15 @@ public class PenguinController : MonoBehaviour
         Debug.Log("Got a fish :)");
         fishCount++;
         fishCountText.text = string.Format("{0}", fishCount);
+    }
+
+    public void EndGame(bool success)
+    {
+        PlayerPrefs.SetInt("Success", success ? 1 : 0);
+        PlayerPrefs.SetInt("Fish", fishCount);
+        PlayerPrefs.SetString("Time", countdownTimer.GetTotalTime());
+        PlayerPrefs.Save();
+        SceneManager.LoadScene(2, LoadSceneMode.Single);
     }
 }
 

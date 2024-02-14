@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class IceburgFloat : MonoBehaviour
+public class IcebergFloat : MonoBehaviour
 {
     [SerializeField] private float floatHeight = 0.1f;
     [SerializeField] private float floatSpeed = 2f;

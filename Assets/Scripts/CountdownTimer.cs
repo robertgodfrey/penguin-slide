@@ -7,6 +7,7 @@ public class CountdownTimer : MonoBehaviour
 {
     [SerializeField] private float totalTime = 45f;
     [SerializeField] private TextMeshProUGUI timerText;
+    [SerializeField] private PenguinController penguinController;
     
     private float timeRemaining;
 
@@ -27,8 +28,13 @@ public class CountdownTimer : MonoBehaviour
         if (timeRemaining <= 0f)
         {
             timeRemaining = 0f;
-            // todo end game
+            penguinController.EndGame(false);
         }
         timerText.text = string.Format("00:{0:00}", timeRemaining);
+    }
+
+    public string GetTotalTime()
+    {
+        return (totalTime - timeRemaining).ToString("F1");
     }
 }
