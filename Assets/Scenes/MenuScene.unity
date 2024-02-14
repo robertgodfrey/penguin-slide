@@ -5611,7 +5611,7 @@ MonoBehaviour:
 
 
     The last iceberg for home leaves
-    in 30 seconds. Can you make it in time?'
+    in 45 seconds. Can you make it in time?'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3752cbbd0c92545719871abb298da08a, type: 2}
   m_sharedMaterial: {fileID: -2459462873084867070, guid: 3752cbbd0c92545719871abb298da08a, type: 2}
@@ -8960,7 +8960,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   penguinController: {fileID: 0}
-  fishValue: 1
 --- !u!114 &1082448987
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15193,7 +15192,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_UiScaleMode: 0
   m_ReferencePixelsPerUnit: 100
-  m_ScaleFactor: 1
+  m_ScaleFactor: 0.5
   m_ReferenceResolution: {x: 800, y: 600}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0

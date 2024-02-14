@@ -5,7 +5,7 @@ using TMPro;
 
 public class CountdownTimer : MonoBehaviour
 {
-    [SerializeField] private float totalTime = 30f;
+    [SerializeField] private float totalTime = 45f;
     [SerializeField] private TextMeshProUGUI timerText;
     
     private float timeRemaining;
