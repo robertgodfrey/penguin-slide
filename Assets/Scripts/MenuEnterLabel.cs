@@ -10,6 +10,7 @@ public class MenuEnterLabel : MonoBehaviour
     [SerializeField] private Color originalColor = Color.black;
     [SerializeField] private float flashSpeed = 1f;
     [SerializeField] private TextMeshProUGUI textComponent;
+    [SerializeField] private int sceneToGoTo = 1;
 
     void Start()
     {
@@ -20,7 +21,11 @@ public class MenuEnterLabel : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter))
         {
-            SceneManager.LoadScene(1, LoadSceneMode.Single);
+            SceneManager.LoadScene(sceneToGoTo, LoadSceneMode.Single);
+        }
+        if(Input.GetKey("escape"))
+        {
+            Application.Quit();
         }
     }
 

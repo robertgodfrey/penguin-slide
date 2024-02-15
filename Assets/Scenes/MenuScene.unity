@@ -15192,7 +15192,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_UiScaleMode: 0
   m_ReferencePixelsPerUnit: 100
-  m_ScaleFactor: 1
+  m_ScaleFactor: 1.75
   m_ReferenceResolution: {x: 800, y: 600}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
@@ -16156,6 +16156,7 @@ MonoBehaviour:
   originalColor: {r: 0, g: 0, b: 0, a: 1}
   flashSpeed: 1
   textComponent: {fileID: 2090504031}
+  sceneToGoTo: 1
 --- !u!114 &2090504031
 MonoBehaviour:
   m_ObjectHideFlags: 0

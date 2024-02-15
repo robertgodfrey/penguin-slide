@@ -28,6 +28,7 @@ public class CountdownTimer : MonoBehaviour
         if (timeRemaining <= 0f)
         {
             timeRemaining = 0f;
+            PlayerPrefs.SetString("FailReason", "OUT OF TIME");
             penguinController.EndGame(false);
         }
         timerText.text = string.Format("00:{0:00}", timeRemaining);

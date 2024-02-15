@@ -56,6 +56,11 @@ public class PenguinController : MonoBehaviour
 
     void FixedUpdate()
     {
+        if(Input.GetKey("escape"))
+        {
+            Application.Quit();
+        }
+
         float distanceTraveledX = Math.Abs(transform.position.x - previousPositionX);
         float currentSpeedX = distanceTraveledX / Time.deltaTime;
         previousPositionX = transform.position.x;
@@ -134,10 +139,20 @@ public class PenguinController : MonoBehaviour
             playerHealth -= 25;
             if (playerHealth <= 0)
             {
+                PlayerPrefs.SetString("FailReason", "HIT TOO MANY ROCKS");
                 EndGame(false);
             }
             healthBarInner.fillAmount = playerHealth * 0.01f;
             hitRock = 0;
+        }
+    }
+
+    void OnTriggerEnter(Collider collider)
+    {
+        if (collider.CompareTag("Ocean"))
+        {
+            PlayerPrefs.SetString("FailReason", "MISSED THE ICEBERG");
+            EndGame(false);
         }
     }
 
